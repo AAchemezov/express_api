@@ -26,7 +26,7 @@ export abstract class BaseController {
         return res.sendStatus(201)
     }
 
-    protected bindRoutes(routes: IControllerRoute[]) {
+    protected bindRoutes(...routes: IControllerRoute[]) {
         routes.forEach(({func, method, path}) => {
             this.logger.log(`[${method}] ${path}`)
             this.router[method](path, func.bind(this))
