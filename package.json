@@ -2,10 +2,11 @@
   "name": "express_api",
   "version": "1.0.0",
   "description": "API nodeJS",
-  "main": "index.ts",
-  "type": "module",
+  "main": "src/index.ts",
+  "type": "commonjs",
   "scripts": {
-    "start": "node ./dist/index.ts",
+    "start": "node ./dist/main.js",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "a.a.chemezov",
