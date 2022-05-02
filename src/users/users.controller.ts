@@ -1,6 +1,7 @@
 import {BaseController} from "../common/base.controller";
 import {LoggerService} from "../logger/logger.service";
 import {IControllerRoute} from "../common/route.interface";
+import {HTTPError} from "../errors/http-error.class";
 
 export class UsersController extends BaseController {
 
@@ -13,7 +14,8 @@ export class UsersController extends BaseController {
     }
 
     login: IControllerRoute['func'] = (req, res, next) => {
-        this.ok(res, 'login')
+        next(new HTTPError(401, 'ошибка авторизации', 'login'))
+        // this.ok(res, 'login')
     }
 
     register: IControllerRoute['func'] = (req, res, next) => {
