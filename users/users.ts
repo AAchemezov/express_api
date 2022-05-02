@@ -2,7 +2,6 @@ import express from 'express'
 
 const userRouter = express.Router()
 
-
 userRouter.use((req, res, next) => {
     console.log('Users')
     next()
@@ -15,6 +14,5 @@ userRouter.post('/login', (req, res) => {
 userRouter.post('/register', (req, res) => {
     res.send('register')
 })
-
 
 export {userRouter};
