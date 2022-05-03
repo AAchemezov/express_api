@@ -9,6 +9,7 @@ import { IUserController } from './user.controller.interface'
 import { NextFunction, Request, Response } from 'express'
 import { UserLoginDto } from './dto/user-login.dto'
 import { UserRegisterDto } from './dto/user-register.dto'
+import { User } from './user.entity'
 
 @injectable()
 export class UserController extends BaseController implements IUserController {
@@ -26,12 +27,14 @@ export class UserController extends BaseController implements IUserController {
 		// this.ok(res, 'login')
 	}
 
-	register(
-		req: Request<unknown, unknown, UserRegisterDto>,
+	async register(
+		{ body }: Request<unknown, unknown, UserRegisterDto>,
 		res: Response,
 		next: NextFunction,
-	): void {
-		console.log(req.body)
-		this.ok(res, 'register')
+	): Promise<void> {
+		const newUser = new User(body.email, body.name)
+		await newUser.setPassword(body.password)
+		console.log(body)
+		this.ok(res, newUser)
 	}
 }
