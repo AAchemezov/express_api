@@ -2,6 +2,7 @@ import express, { Express } from 'express'
 import { Server } from 'http'
 import { inject, injectable } from 'inversify'
 import 'reflect-metadata'
+import { json } from 'body-parser'
 
 import { IExceptionFilter } from './errors/exception.filter.interface'
 import { ILogger } from './logger/logger.interface'
@@ -27,6 +28,10 @@ export class App {
 		this.app.use('/users', this.userController.router)
 	}
 
+	useMiddleWare(): void {
+		this.app.use(json())
+	}
+
 	useExceptionFilters(): void {
 		this.app.use('/users', this.userController.router)
 		this.app.use(this.exceptionFilter.catch.bind(this.exceptionFilter))
@@ -35,6 +40,7 @@ export class App {
 	public async init(): Promise<void> {
 		const { port } = this
 
+		this.useMiddleWare()
 		this.useRoutes()
 		this.useExceptionFilters()
 		this.server = this.app.listen(port)
