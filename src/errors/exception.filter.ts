@@ -9,7 +9,7 @@ import { TYPES } from '../types'
 
 @injectable()
 export class ExceptionFilter implements IExceptionFilter {
-	constructor(@inject(TYPES.ILogger) private logger: ILogger) {}
+	constructor(@inject(TYPES.Logger) private logger: ILogger) {}
 
 	catch(error: Error | HTTPError, req: Request, res: Response, next: NextFunction): void {
 		if (error instanceof HTTPError) {
